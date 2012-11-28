@@ -4,6 +4,8 @@ Created on Nov 27, 2012
 @author: user
 '''
 
+import time
+
 if __name__ == '__main__':
     pass
 
@@ -59,10 +61,10 @@ def record_user_click(index,keyword,url):
 def add_to_index(index, keyword, url):
     for entry in index:
         if entry[0] == keyword:
-            if url in entry[1]:
-                return
-            else:
-                entry[1].append(url)
+            for urlEntry in entry[1]:
+                if url == urlEntry[0]:
+                    return
+            entry[1].append([url,0])
             return
     # not found, add new keyword to index
     index.append([keyword, [[url,0]]])
@@ -89,3 +91,16 @@ def crawl_web(seed):
             union(tocrawl,get_all_links(content))
             crawled.append(page)
     return index
+
+def time_execution(code):
+    start = time.clock()
+    result = eval(code)
+    run_time = time.clock()-start
+    return result, run_time
+
+def spin_loop(n):
+    i = 0
+    while i<n:
+        i+=1
+        
+print time_execution('spin_loop(10**7)')[1]
