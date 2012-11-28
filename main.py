@@ -103,4 +103,27 @@ def spin_loop(n):
     while i<n:
         i+=1
         
-print time_execution('spin_loop(10**7)')[1]
+def hash_string(keyword,buckets):
+    tot = 0
+    for c in keyword: tot = (tot + ord(c)) % buckets
+    return tot%buckets
+
+def make_hashtable(nbuckets):
+    table = []
+    for i in range(nbuckets): table.append([])
+    return table
+
+print hash_string('a',12)
+print hash_string('b',12)
+print hash_string('a',13)
+print hash_string('au',12)
+print hash_string('udacity',12)
+
+
+# data = [bucket,bucket.....]
+# bucket = [[word,list of urls],[word,list of urls]....]
+# list of urls = [[urls,clicks],[urls,clicks],...]
+#
+# thus, data = [[[[[urls,clicks],[urls,clicks],...]],[word,[[urls,clicks],[urls,clicks],...]]....],.....]
+#
+
